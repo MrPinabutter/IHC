@@ -6,12 +6,29 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+    <script type="module">
+        import 'https://cdn.interactjs.io/v1.9.20/auto-start/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/actions/drag/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/actions/resize/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/modifiers/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/dev-tools/index.js'
+        import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
+        
+        interact('.item').draggable({
+          onmove(event) {
+            console.log(event.pageX,
+                        event.pageY)
+          }
+        })
+        </script>
 </head>
 <body>
     <div class="draggable" draggable="true">
         Teste
     </div>
 
-    <script type="module" src="./exemplo.js"></script>
+    <script type="module" src="./exemplo.js">
+
+    </script>
 </body>
 </html>
