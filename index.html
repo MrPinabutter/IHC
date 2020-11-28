@@ -27,8 +27,25 @@
         Teste
     </div>
 
-    <script type="module" src="./exemplo.js">
+    <script type="module">
 
+        const position = { x: 0, y: 0 }
+
+        interact('.draggable').draggable({
+        listeners: {
+            start (event) {
+                console.log('posição x ' + position.x);
+                console.log('posição y ' + position.y);
+            },
+            move (event) {
+            position.x += event.dx
+            position.y += event.dy
+
+            event.target.style.transform =
+                `translate(${position.x}px, ${position.y}px)`
+            }
+        }
+        })
     </script>
 </body>
 </html>
