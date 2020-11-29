@@ -13,54 +13,21 @@
         import 'https://cdn.interactjs.io/v1.9.20/modifiers/index.js'
         import 'https://cdn.interactjs.io/v1.9.20/dev-tools/index.js'
         import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
-        
-        interact('.item').draggable({
-          onmove(event) {
-            console.log(event.pageX,
-                        event.pageY)
-          }
-        })
-        </script>
+    </script>
 </head>
 <body>
     <div class="draggable" draggable="true">
         Me arraste
     </div>
+
     <div class="event">
         Me clique
     </div>
 
-    <script type="module">
-
-        const position = { x: 0, y: 0 }
-
-        interact('.draggable').draggable({
-        listeners: {
-            start (event) {
-                console.log(`Inicio: x = ${position.x} y = ${position.y}`);
-            },
-            move (event) {
-                position.x += event.dx
-                position.y += event.dy
-
-                event.target.style.transform =
-                    `translate(${position.x}px, ${position.y}px)`
-                },
-            end (event){
-                console.log(`Final: x = ${position.x} y = ${position.y}`);
-            }
-        }})
-
-        interact('.event').on('doubletap', (event) => {
-            console.log(event);
-            event.target.style.backgroundColor = `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
-        })
-
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min;
-}
+    <div class="rot">
+        Me rode
+    </div>
+    <script src="./index.js" >
     </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 .draggable{
     display: flex;
     justify-content: center;
@@ -7,6 +8,8 @@
     background-color: rgb(82, 21, 82);
     font-size: 50;
     color: #fff;
+    touch-action: none;
+    user-select: none;
 }
 
 .event{
@@ -18,4 +21,18 @@
     align-items: center;
     font-size: 50;
     color: #fff;
+    user-select: none;
+}
+
+.rot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    background-color: #10aacc;
+    font-size: 50;
+    color: #fff;
+    touch-action: none;
+    user-select: none;
 }
