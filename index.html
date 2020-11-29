@@ -24,7 +24,10 @@
 </head>
 <body>
     <div class="draggable" draggable="true">
-        Teste
+        Me arraste
+    </div>
+    <div class="event">
+        Eventos
     </div>
 
     <script type="module">
@@ -46,7 +49,11 @@
             end (event){
                 console.log(`Final: x = ${position.x} y = ${position.y}`);
             }
-        }})
+        }}).on('doubletap', (event) => {
+            console.log(event);
+            event.target.styles.color = "rgb(56, 12, 3)"
+            event.target.styles.borderRadious = "20px"
+        })
     </script>
 </body>
 </html>
