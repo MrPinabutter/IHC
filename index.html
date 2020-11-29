@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
         Me arraste
     </div>
     <div class="event">
-        Eventos
+        Me clique
     </div>
 
     <script type="module">
@@ -53,8 +53,7 @@
 
         interact('.event').on('doubletap', (event) => {
             console.log(event);
-            event.target.style.backgroundColor =
-                    `#F0F`
+            event.target.style.backgroundColor = `#F0F`
         })
     </script>
 </body>
