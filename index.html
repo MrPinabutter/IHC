@@ -53,8 +53,14 @@
 
         interact('.event').on('doubletap', (event) => {
             console.log(event);
-            event.target.style.backgroundColor = `#F0F`
+            event.target.style.backgroundColor = `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
         })
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+}
     </script>
 </body>
 </html>
