@@ -40,19 +40,21 @@
                 console.log(`Inicio: x = ${position.x} y = ${position.y}`);
             },
             move (event) {
-            position.x += event.dx
-            position.y += event.dy
+                position.x += event.dx
+                position.y += event.dy
 
-            event.target.style.transform =
-                `translate(${position.x}px, ${position.y}px)`
-            },
+                event.target.style.transform =
+                    `translate(${position.x}px, ${position.y}px)`
+                },
             end (event){
                 console.log(`Final: x = ${position.x} y = ${position.y}`);
             }
-        }}).on('doubletap', (event) => {
+        }})
+
+        interact('.event').on('doubletap', (event) => {
             console.log(event);
-            event.target.styles.color = "rgb(56, 12, 3)"
-            event.target.styles.borderRadious = "20px"
+            event.target.style.backgroundColor =
+                    `#F0F`
         })
     </script>
 </body>
