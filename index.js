@@ -23,6 +23,7 @@ const position1 = { x: 0, y: 0 }
 
 interact('.hold').on('hold', (event) => {
     console.log("segurou");
+    event.target.style.backgroundColor = '#d44'
     event.currentTarget.classList.toggle('drig')
 })
 
@@ -39,6 +40,7 @@ interact('.drig').draggable({
             `translate(${position1.x}px, ${position1.y}px)`
         },
         end (event){
+            event.target.style.backgroundColor = '#f63'
             event.currentTarget.classList.remove('drig')
         }
     }})
