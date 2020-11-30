@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+    <script type="module">
+        import 'https://cdn.interactjs.io/v1.9.20/auto-start/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/actions/drag/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/actions/resize/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/modifiers/index.js'
+        import 'https://cdn.interactjs.io/v1.9.20/dev-tools/index.js'
+        import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
+    </script>
+    <style>
+
+.draggable{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 240px;
+    background-color: rgb(82, 21, 82);
+    font-size: 50;
+    color: #fff;
+    touch-action: none;
+    user-select: none;
+}
+
+.event{
+    display: flex;
+    width: 240px;
+    height: 300px;
+    background-color: #a5a;
+    justify-content: center;
+    align-items: center;
+    font-size: 50;
+    color: #fff;
+    user-select: none;
+    touch-action: none;
+}
+
+.hold{
+    display: flex;
+    width: 240px;
+    height: 300px;
+    background-color: #f63;
+    justify-content: center;
+    align-items: center;
+    font-size: 50;
+    color: #fff;
+    user-select: none;
+    touch-action: none;
+}
+
+.rot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    background-color: #a090ff;
+    font-size: 50;
+    color: #fff;
+    touch-action: none;
+    user-select: none;
+}
+
+.zoom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    background-color: #10aacc;
+    font-size: 50;
+    color: #fff;
+    touch-action: none;
+    user-select: none;
+}
+    </style>
+</head>
+<body>
+    <div class="draggable" draggable="true">
+        Me arraste
+    </div>
+
+    <div class="event">
+        Me clique
+    </div>
+
+    <div class="rot">
+        Me rode
+    </div>
+
+    <div class="zoom">
+        Zoom me
+    </div>
+
+    <div class="hold" draggable="true">
+        Segure e solte p arrastar
+    </div>
+    <script >
+        const position = { x: 0, y: 0 }
+
+interact('.draggable').draggable({
+  listeners: {
+    start (event) {
+      console.log(`Inicio: x = ${position.x} y = ${position.y}`);
+    },
+    move (event) {
+      position.x += event.dx
+      position.y += event.dy
+      
+      event.target.style.transform =
+      `translate(${position.x}px, ${position.y}px)`
+    }
+  }})
+  
+interact('.event').on('tap', (event) => {
+  console.log(event);
+  console.log(event.y0);
+  event.target.style.backgroundColor = `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
+})
+  
+const position1 = { x: 0, y: 0 }
+
+interact('.hold').on('hold', (event) => {
+  console.log("segurou");
+  event.target.style.backgroundColor = '#d44'
+  event.currentTarget.classList.toggle('drig')
+})
+
+interact('.drig').draggable({
+  listeners: {
+    start (event) {
+      console.log(`Inicio: x = ${position1.x} y = ${position1.y}`);
+    },
+    move (event) {
+      position1.x += event.dx
+      position1.y += event.dy
+      
+      event.target.style.transform =
+      `translate(${position1.x}px, ${position1.y}px)`
+    },
+    end (event){
+      event.target.style.backgroundColor = '#f63'
+      event.currentTarget.classList.remove('drig')
+    }
+  }})
+
+var angle = 0
+
+interact('.rot').gesturable({
+  listeners:{
+    move: function (event) {
+      angle += event.da;
+      event.target.innerText = "To ficando tontoooo"
+      event.target.style.webkitTranform = 'rotate(' + angle + 'deg)';
+      event.target.style.transform = 'rotate(' + angle + 'deg)';
+    },
+    end(event){
+      event.target.innerText = "Me mova"
+    }
+  }
+})
+  
+var angleScale = {
+  angle: 0,
+  scale: 1
+}
+
+interact('.zoom').gesturable({
+  listeners:{
+    start(event){
+      angleScale.angle -=event.angle
+
+    },
+    move (event) {
+      var currentAngle = event.angle + angleScale.angle
+      var currentScale = event.scale * angleScale.scale
+
+      event.target.style.webkitTransform =
+      event.target.style.transform =
+      'rotate(' + currentAngle + 'deg)' + 'scale(' + currentScale + ')'
+
+      dragMoveListener(event)
+    },
+    end (event) {
+      angleScale.angle = angleScale.angle + event.angle
+      angleScale.scale = angleScale.scale * event.scale
+
+      resetTimeout = setTimeout(reset, 200)
+      event.target.classList.add('reset')
+    }
+  }
+}).draggable({
+  listeners: { move: dragMoveListener }
+})
+
+function reset () {
+  scaleElement.style.webkitTransform =
+    scaleElement.style.transform =
+    'scale(1)'
+
+  angleScale.angle = 0
+  angleScale.scale = 1
+}
+
+
+
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+    </script>
+</body>
+</html>

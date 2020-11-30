@@ -16,6 +16,7 @@ interact('.draggable').draggable({
     
 interact('.event').on('tap', (event) => {
     console.log(event);
+    console.log(event.y0);
     event.target.style.backgroundColor = `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`
 })
     
@@ -57,6 +58,36 @@ interact('.rot').gesturable({
             event.target.style.transform = 'rotate(' + angle + 'deg)';
         }
     }
+})
+
+var angleScale = {
+  angle: 0,
+  scale: 1
+}
+
+interact('.zoom').gesturable({
+  listeners:{
+    start(event){
+      angleScale.angle -=event.angle
+
+    },
+    move (event) {
+      var currentAngle = event.angle + angleScale.angle
+      var currentScale = event.scale * angleScale.scale
+
+      event.target.style.webkitTransform =
+      event.target.style.transform =
+      'rotate(' + currentAngle + 'deg)' + 'scale(' + currentScale + ')'
+
+      dragMoveListener(event)
+    },
+    end (event) {
+      angleScale.angle = angleScale.angle + event.angle
+      angleScale.scale = angleScale.scale * event.scale
+    }
+  }
+}).draggable({
+  listeners: { move: dragMoveListener }
 })
 
 function getRandomInt(min, max) {

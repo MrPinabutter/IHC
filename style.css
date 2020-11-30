@@ -22,6 +22,7 @@
     font-size: 50;
     color: #fff;
     user-select: none;
+    touch-action: none;
 }
 
 .hold{
@@ -34,9 +35,23 @@
     font-size: 50;
     color: #fff;
     user-select: none;
+    touch-action: none;
 }
 
 .rot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 300px;
+    background-color: #1010cc;
+    font-size: 50;
+    color: #fff;
+    touch-action: none;
+    user-select: none;
+}
+
+.zoom{
     display: flex;
     justify-content: center;
     align-items: center;
