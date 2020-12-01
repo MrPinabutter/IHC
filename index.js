@@ -50,17 +50,20 @@ interact('.drig').draggable({
 
 var angle = 0
 
+
 interact('.rot').gesturable({
     listeners:{
-        move: function (event) {
-            angle += event.da;
-            console.log(event);
-            event.target.style.webkitTranform =
-            event.target.style.transform = 'rotate(' + angle + 'deg)';
-        }
+      move: function (event) {
+        angle += event.da;
+        event.target.innerText = "To ficando tontoooo"
+        event.target.style.webkitTranform = 'rotate(' + angle + 'deg)';
+        event.target.style.transform = 'rotate(' + angle + 'deg)';
+      },
+      end(event){
+        event.target.innerText = "Me gire"
+      }
     }
-})
-
+  })
 var angleScale = {
   angle: 0,
   scale: 1
