@@ -15,93 +15,88 @@
         import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
     </script>
     <style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .draggable{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 240px;
-    background-color: rgb(82, 21, 82);
-    font-size: 50;
-    color: #fff;
-    touch-action: none;
-    user-select: none;
+  background-color: rgb(82, 21, 82);
+  font-size: 50;
+  color: #fff;
 }
 
 .event{
-    display: flex;
-    width: 240px;
-    height: 300px;
-    background-color: #a5a;
-    justify-content: center;
-    align-items: center;
-    font-size: 50;
-    color: #fff;
-    user-select: none;
-    touch-action: none;
+  background-color: #a5a;
+  font-size: 50;
+  color: #fff;
 }
 
 .hold{
-    display: flex;
-    width: 240px;
-    height: 300px;
-    background-color: #f63;
-    justify-content: center;
-    align-items: center;
-    font-size: 50;
-    color: #fff;
-    user-select: none;
-    touch-action: none;
+  background-color: #f63;
+  font-size: 50;
+  color: #fff;
 }
 
 .rot{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 350px;
-    height: 300px;
-    background-color: #a090ff;
-    font-size: 50;
-    color: #fff;
-    touch-action: none;
-    user-select: none;
+  background-color: #1010cc;
+  font-size: 50;
+  color: #fff;
 }
 
 .zoom{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 350px;
-    height: 300px;
-    background-color: #10aacc;
-    font-size: 50;
-    color: #fff;
-    touch-action: none;
-    user-select: none;
+  
+  background-color: #10aacc;
+  font-size: 50;
+  color: #fff;
+  touch-action: none;
+  user-select: none;
+}
+
+.block{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  touch-action: none;
+  user-select: none;
+  margin-top: 50px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-family: sans-serif;
 }
     </style>
 </head>
 <body>
-    <div class="draggable" draggable="true">
+  <div class="container">
+    <div class="draggable block" draggable="true">
         Me arraste
     </div>
 
-    <div class="event">
+    <div class="event block">
         Me clique
     </div>
 
-    <div class="rot">
+    <div class="rot block">
         Me rode
     </div>
 
-    <div class="zoom">
+    <div class="zoom block">
         Zoom me
     </div>
 
-    <div class="hold" draggable="true">
+    <div class="hold block" draggable="true">
         Segure e solte p arrastar
     </div>
+  </div>
     <script >
         const position = { x: 0, y: 0 }
 
@@ -126,11 +121,10 @@ interact('.event').on('tap', (event) => {
 })
   
 const position1 = { x: 0, y: 0 }
-
 interact('.hold').on('hold', (event) => {
-  console.log("segurou");
-  event.target.style.backgroundColor = '#d44'
-  event.currentTarget.classList.toggle('drig')
+    event.target.style.backgroundColor = '#d44'
+    event.currentTarget.innerText = 'Arraste'
+    event.currentTarget.classList.toggle('drig')
 })
 
 interact('.drig').draggable({
@@ -147,9 +141,11 @@ interact('.drig').draggable({
     },
     end (event){
       event.target.style.backgroundColor = '#f63'
+      event.currentTarget.innerText = 'Segure e solte para arrastar'
       event.currentTarget.classList.remove('drig')
     }
-  }})
+}})
+
 
 var angle = 0
 

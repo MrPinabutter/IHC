@@ -23,8 +23,8 @@ interact('.event').on('tap', (event) => {
 const position1 = { x: 0, y: 0 }
 
 interact('.hold').on('hold', (event) => {
-    console.log("segurou");
     event.target.style.backgroundColor = '#d44'
+    event.currentTarget.innerText = 'Arraste'
     event.currentTarget.classList.toggle('drig')
 })
 
@@ -42,6 +42,7 @@ interact('.drig').draggable({
         },
         end (event){
             event.target.style.backgroundColor = '#f63'
+            event.currentTarget.innerText = 'Segure e solte para arrastar'
             event.currentTarget.classList.remove('drig')
         }
     }})
